@@ -14,7 +14,78 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: url('https://lh3.googleusercontent.com/d/1AS3tZyizHN4D58G6Vy2UkgWD18MGPhCu=w2000') no-repeat center center/cover;
+  background-size: cover;
   height: 100vh;
+  display: flex;
+  
+}
+
+/* ================== SIDEBAR ================== */
+.sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(5px);
+    padding: 20px 10px;
+    flex-shrink: 0;
+    min-height: 100vh;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.sidebar .logo {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.sidebar h2 {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar p {
+    color: #e5e7eb;
+    font-size: 13px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 1024px) {
+    .right-panel {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+    .sidebar {
+        width: 220px;
+        min-height: 90vh;
+        padding: 15px 8px;
+    }
+    .sidebar .logo {
+        width: 150px;
+        height: 150px;
+        margin-top: 40px;
+    }
+    .sidebar h2 {
+        font-size: 12px;
+    }
+    .sidebar p {
+        font-size: 10px;
+    }
+}
+
+.form-container {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,6 +194,14 @@ select option {
 
 <body>
 
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <img src="https://drive.google.com/thumbnail?id=1chJPMOCORig5DYGs5JAVIaN8hB8PAreA&sz=w2000" alt="Logo PTIS" class="logo">
+    <h2>Sistem Pengurusan Data ICT Sekolah</h2>
+    <p>Mudah, pantas, mesra pengguna</p>
+</div>  
+
+<div class="form-container">
 <div class="form-box">
   <h3>Daftar Pengguna Baharu</h3>
 

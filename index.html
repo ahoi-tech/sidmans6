@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sistem Pengurusan Data ICT Sekolah — PTIS 2, PPD Kunak</title>
+
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+
+/* RESET & BODY */
+html, body {
+    margin:0; padding:0; height:100%;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(#16163878), url('https://lh3.googleusercontent.com/d/1AS3tZyizHN4D58G6Vy2UkgWD18MGPhCu=w2000') no-repeat center center/cover;
+    background-size: cover;
+    overflow-x: hidden;
+}
+
+/* FLEX LAYOUT */
+body {
+    display: flex;
+}
+
+/* ================== SIDEBAR ================== */
+.sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(5px);
+    padding: 20px 10px;
+    flex-shrink: 0;
+    min-height: 100vh;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.sidebar .logo {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.sidebar h2 {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar p {
+    color: #e5e7eb;
+    font-size: 13px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 1024px) {
+    .right-panel {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+    .sidebar {
+        width: 200px;
+        min-height: 150vh;
+        padding: 15px 8px;
+    }
+    .sidebar .logo {
+        width: 150px;
+        height: 150px;
+        margin-top: 40px;
+    }
+    .sidebar h2 {
+        font-size: 12px;
+    }
+    .sidebar p {
+        font-size: 10px;
+    }
+}
+
+
+/* ================== RIGHT PANEL ================== */
+.right-panel {
+    flex:1;
+    padding:70px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* BOX STYLE: glass + shadow + border radius */
+.info-box, .login-box {
+    margin-top: 50px;
+    height: 400px;
+    background: rgba(255,255,255,0.05); /* translucent */
+    backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    border-left: 4px solid #3b82f6;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-box:hover, .login-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+}
+
+/* HEADINGS */
+.info-box h3, .login-box h3 {
+    margin-top:0; margin-bottom:40px;
+    font-weight:600;
+    font-size:20px;
+    position:relative;
+    font-family: "Lucida Console", Monaco, monospace;
+}
+.login-box h3 {
+    font-size:24px; text-align:center; color:#fff;
+    position:relative; z-index:1; 
+}
+.login-box h3:before {
+    content:""; position:absolute; left:0; top:0; width:100%; height:100%;
+    z-index:-1;
+    background: linear-gradient(270deg, #4c00ff, #8a00ff, #00eaff);
+    background-size:300%;
+    animation:aurora 10s infinite linear;
+    filter:blur(15px);
+}
+@keyframes aurora { 0%{background-position:0%;} 100%{background-position:300%;} }
+
+p {
+    font-size:14px; text-align:left; color:#fff;
+    position:relative; z-index:1; font-family: Tahoma, Geneva, sans-serif;
+}
+
+li {
+    font-size:14px; text-align:left; color:#fff;
+    position:relative; z-index:1; margin-bottom: 15px; word-spacing: 7px; font-family: Tahoma, Geneva, sans-serif;
+}
+
+/* UL STYLE */
+.info-box ul {
+    padding-left:18px;
+}
+
+/* BUTTONS: gradient + shadow */
+.btn-login, .btn-register {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+/* Login Button Gradient */
+.btn-login {
+    background: linear-gradient(135deg, #3b82f6, #9333ea);
+    color: #fff;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #2563eb, #7e22ce);
+    transform: translateY(-1px);
+}
+
+/* Register Button Gradient */
+.btn-register {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: #fff;
+}
+
+.btn-register:hover {
+    background: linear-gradient(135deg, #059669, #0891b2);
+    transform: translateY(-1px);
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 1024px) {
+    .right-panel {
+        grid-template-columns: repeat(2, 1fr);
+        padding:20px;
+    }
+}
+
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar { width:100%; min-height:auto; padding:15px 10px; }
+    .right-panel { grid-template-columns: 1fr; padding:15px; }
+}
+
+.new-icon {
+    color: #fbff00;
+    animation: newPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes newPulse {
+    0% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 2px rgb(255, 242, 0)); }
+    50% { opacity: 0.4; transform: scale(1.12); filter: drop-shadow(0 0 6px rgb(251, 255, 0)); }
+    100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 2px rgb(246, 255, 0)); }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <img src="https://drive.google.com/thumbnail?id=1chJPMOCORig5DYGs5JAVIaN8hB8PAreA&sz=w2000" alt="Logo PTIS" class="logo">
+    <h2>Sistem Pengurusan Data ICT Sekolah</h2>
+    <p>Mudah, pantas, dan mesra pengguna.</p>
+</div>
+
+<!-- RIGHT PANEL 3 KOLUM -->
+<div class="right-panel">
+
+    <!-- BOX 1: Informasi -->
+    <div class="info-box">
+        <h3>Maklumat Sistem</h3>
+        <p>Sistem ini membolehkan pengguna (Guru ICT/Admin sekolah) merekod peralatan ICT dan memantau status dengan mudah dan cepat.</p>
+        <p>Juga direka khusus untuk kegunaan Pasukan Teknikal ICT Sekolah (PTIS), PPD Kunak bagi meningkatkan kecekapan pengurusan data ICT di sekolah-sekolah.</p>
+        <p>Sistem akan sentiasa dikemaskini dari semasa ke semasa.</p>
+        <p>Selamat menggunakan sistem ini!</p>
+    </div>
+
+    <!-- BOX 2: Notis -->
+    <div class="info-box">
+        <h3>Notis Penting
+            <span class="iconify new-icon" data-icon="mdi:new-box" data-width="26" data-height="26"></span>
+        </h3>
+        <ul>
+            <li>Pastikan kemaskini data dilakukan 3 bulan sekali (4 Fasa).</li>
+            <li>Kemaskini data segera jika ada perubahan untuk mengelakkan data anda tercicir.
+            <li>Pastikan semua peralatan direkod dengan betul.</li>
+            <li>Hubungi admin jika terdapat ralat data atau masalah mengenai sistem ini.</li>
+        </ul>
+    </div>
+
+    <!-- BOX 3: Login / Daftar -->
+    <div class="login-box">
+        <h3>Akses Pengguna</h3>
+        <a href="/login" class="btn-login">Log Masuk</a>
+        <a href="/register" class="btn-register">Daftar Pengguna Baru</a>
+    </div>
+
+</div>
+
+<script>
+// BUTTON LOGIN
+document.querySelector(".btn-login").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "/login";
+});
+
+// BUTTON REGISTER
+document.querySelector(".btn-register").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "/register";
+});
+</script>
+
+</body>
+</html>

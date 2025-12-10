@@ -1,0 +1,87 @@
+ body { background: linear-gradient(rgba(42, 42, 43, 0.717),rgba(42, 42, 43, 0.717)), url("https://lh3.googleusercontent.com/d/1AS3tZyizHN4D58G6Vy2UkgWD18MGPhCu=w1300") no-repeat fixed center/cover; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+    .card { background: rgba(42, 42, 43, 0.852); border-radius: 12px; padding: 16px; box-shadow: 3px 3px 10px 3px #707171; }
+    .table-input { min-width: 120px; }
+    .btn { transition: all .12s ease; }
+    .sticky-header { position: sticky; top: 0; backdrop-filter: blur(4px); z-index: 20; }
+    .small-muted { font-size: 0.85rem; color: #64748b; }
+    .icon-btn { width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; }
+    .hidden { display:none; }
+    /* simple responsive table wrapper */
+    .table-wrap{ overflow:auto; }
+
+/* =========================
+   STATUS BADGE PA
+   ========================= */
+.pa-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pa-hidden {opacity: 0 !important; transform: translate(-50%, -10px) !important;}
+.pa-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE MK
+   ========================= */
+.mk-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.mk-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.mk-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE PDP
+   ========================= */
+.pdp-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pdp-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.pdp-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE PDT
+   ========================= */
+.pdt-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pdt-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.pdt-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE PC
+   ========================= */
+.pc-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pc-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.pc-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE PG
+   ========================= */
+.pg-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pg-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.pg-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE NET
+   ========================= */
+.net-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.net-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.net-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Keyframe untuk animasi modal */
+@keyframes modalShow {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

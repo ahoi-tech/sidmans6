@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Sistem Pengurusan Data ICT — PTIS 2, PPD Kunak</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a2d9d5a34a.js" crossorigin="anonymous"></script>
+
+  <style>
+    body { background: linear-gradient(rgba(42, 42, 43, 0.717),rgba(42, 42, 43, 0.717)), url("https://lh3.googleusercontent.com/d/1AS3tZyizHN4D58G6Vy2UkgWD18MGPhCu=w1300") no-repeat fixed center/cover; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+    .card { background: rgba(42, 42, 43, 0.852); border-radius: 12px; padding: 16px; box-shadow: 3px 3px 10px 3px #707171; }
+    .table-input { min-width: 120px; }
+    .btn { transition: all .12s ease; }
+    .sticky-header { position: sticky; top: 0; backdrop-filter: blur(4px); z-index: 20; }
+    .small-muted { font-size: 0.85rem; color: #64748b; }
+    .icon-btn { width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; }
+    .hidden { display:none; }
+    /* simple responsive table wrapper */
+    .table-wrap{ overflow:auto; }
+
+/* =========================
+   STATUS BADGE PA
+   ========================= */
+.pa-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pa-hidden {opacity: 0 !important; transform: translate(-50%, -10px) !important;}
+.pa-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE MK
+   ========================= */
+.mk-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.mk-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.mk-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE PDP
+   ========================= */
+.pdp-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pdp-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.pdp-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE PDT
+   ========================= */
+.pdt-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pdt-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.pdt-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE PC
+   ========================= */
+.pc-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pc-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.pc-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE PG
+   ========================= */
+.pg-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.pg-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.pg-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* =========================
+   STATUS BADGE NET
+   ========================= */
+.net-badge {position: flex;top: 18px;left: 50%;transform: translateX(-50%);padding: 6px 16px;background: #334155; /* slate-700 */color: #fff;border-radius: 8px;font-size: 0.85rem;font-weight: 600;box-shadow: 0 4px 12px rgba(0,0,0,.3);opacity: 1;transition: opacity .35s ease, transform .35s ease;z-index: 9999;display: flex;align-items: center;}
+.net-hidden {opacity: 0 !important;transform: translate(-50%, -10px) !important;}
+.net-spinner {border: 3px solid rgba(255,255,255,0.35);border-top-color: white;border-radius: 50%;width: 16px;height: 16px;margin-right: 8px;animation: spin 1s linear infinite;}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Keyframe untuk animasi modal */
+@keyframes modalShow {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+  </style>
+</head>
+
+
+<body class="from-slate-50 to-slate-100 min-h-screen">
+
+<div class="flex">
+
+<!-- SIDEBAR -->
+<aside class="w-72 text-white min-h-screen p-6">
+  
+
+    <!-- LOGO DI ATAS (TENGAH) -->
+    <div class="flex justify-center mb-1">
+        <img 
+          src="https://drive.google.com/thumbnail?id=1chJPMOCORig5DYGs5JAVIaN8hB8PAreA&sz=w2000"
+          alt="Logo PTIS"
+          class="w-50 h-auto"
+        >
+    </div>
+
+    <!-- TAJUK SISTEM -->
+    <div class="mb-4">
+      <div class="text-center">
+        <div class="font-bold text-xl">SISTEM PENGURUSAN DATA ICT</div>
+      </div>
+    </div>
+
+   <nav class="space-y-0">
+
+  <!-- Pusat Akses -->
+  <button class="nav-btn w-full text-left flex items-center gap-2 px-4 py-1 rounded-md hover:bg-orange-700" data-target="pa">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9L12 4L21 9V20H3V9Z"/>
+      <path d="M9 22V12H15V22"/>
+    </svg>
+    Pusat Akses
+  </button>
+
+  <!-- Makmal Komputer -->
+  <button class="nav-btn w-full text-left flex items-center gap-2 px-4 py-1 rounded-md hover:bg-orange-700" data-target="mk">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="13" rx="2" ry="2"/>
+      <line x1="8" y1="21" x2="16" y2="21"/>
+      <line x1="12" y1="17" x2="12" y2="21"/>
+    </svg>
+    Makmal Komputer
+  </button>
+
+  <!-- PdP -->
+  <button class="nav-btn w-full text-left flex items-center gap-2 px-4 py-1 rounded-md hover:bg-orange-700" data-target="pdp">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4H14L20 10V20H4V4Z"/>
+      <line x1="14" y1="4" x2="14" y2="10"/>
+    </svg>
+    PdP
+  </button>
+
+  <!-- PdT -->
+  <button class="nav-btn w-full text-left flex items-center gap-2 px-4 py-1 rounded-md hover:bg-orange-700" data-target="pdt">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15A1.65 1.65 0 0 0 21 13.35 1.65 1.65 0 0 0 19.4 11M4.6 11A1.65 1.65 0 0 0 3 12.65 1.65 1.65 0 0 0 4.6 15M12 3V5M12 19V21M21 12H19M5 12H3"/>
+    </svg>
+    PdT
+  </button>
+
+  <!-- Peranti Cerdik -->
+  <button class="nav-btn w-full text-left flex items-center gap-2 px-4 py-1 rounded-md hover:bg-orange-700" data-target="pc">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="7" y="2" width="10" height="20" rx="2" ry="2"/>
+      <line x1="12" y1="18" x2="12" y2="18"/>
+    </svg>
+    Peranti Cerdik
+  </button>
+
+  <!-- Peranti Guru -->
+  <button class="nav-btn w-full text-left flex items-center gap-2 px-4 py-1 rounded-md hover:bg-orange-700" data-target="pg">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="7" r="4"/>
+      <path d="M6 21C6 17 8 15 12 15C16 15 18 17 18 21"/>
+    </svg>
+    Peranti Guru
+  </button>
+
+  <!-- Internet -->
+  <button class="nav-btn w-full text-left flex items-center gap-2 px-4 py-1 rounded-md hover:bg-orange-700" data-target="net">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M2 12H22M12 2C15 5 16 9 16 12C16 15 15 19 12 22M12 2C9 5 8 9 8 12C8 15 9 19 12 22"/>
+    </svg>
+    Internet
+  </button>
+
+</nav>
+
+
+    <div class="mt-8 text-xs text-sky-200">
+      <div class="mb-1">INFO:</div>
+      <ul class="list-disc ml-4">
+        <li>Setiap perubahan akan disimpan secara <span class="font-semibold">AUTOMATIK</span></li>
+        <li>Data akan cuba disimpan ke online (jika dihubungkan), jika tidak, digunakan localStorage</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="flex-1 p-6">
+    <header class="flex items-center justify-between mb-6">
+      <div>
+        <h1 id="pageTitle" class="text-white text-2xl font-semibold text-slate-700">DASHBOARD PENGURUSAN DATA ICT</h1>
+        <p class="text-white small-muted">NAMA SEKOLAH</p>
+      </div>
+      <div class="flex gap-2 items-center">
+
+ <button id="logoutBtn"
+        class="group flex items-center gap-2 px-3 py-1
+               border-2 border-red-600 text-red-600 font-semibold rounded-xl
+               hover:bg-red-600 hover:text-white hover:scale-[1.05]
+               transition-all duration-300">
+
+  <span class="italic">Log Keluar</span>
+
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all duration-300"
+       fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M17 16l4-4m0 0l-4-4m4 4H7" />
+  </svg>
+</button>
+
+<!-- ========================= -->
+<!--        LOGOUT MODAL      -->
+<!-- ========================= -->
+<div id="logoutModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden items-center justify-center z-50">
+
+  <div class="flex items-center justify-center">
+    <div class="bg-white w-full max-w-sm rounded-xl shadow-xl p-6 animate-[modalShow_0.25s_ease]">
+
+      <p class="text-slate-600 mb-6">
+        Adakah anda pasti ingin log keluar?<br>
+        Pastikan semua data sudah disimpan.
+      </p>
+
+      <div class="flex justify-end gap-3">
+        <button id="cancelLogout"
+                class="px-4 py-2 rounded-lg border border-slate-300 hover:bg-slate-100">
+          Batal
+        </button>
+
+        <button id="confirmLogout"
+                class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 shadow">
+          Ya, Log Keluar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+    <!-- CONTENT SECTIONS (SPA) -->
+    <section id="pa" class="section card mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-white text-2xl font-semibold">PUSAT AKSES</h2>
+      
+        <div id="pa_save_status" class="justify-between pa-badge pa-hidden"></div>
+      </div>
+
+
+
+      <!-- top controls -->
+      <div class="grid md:grid-cols-3 gap-4 mb-4">
+        <div class="bg-sky-200 p-4 rounded-lg border">
+          <label class="block font-medium">Status Pusat Akses</label>
+          <select id="pa_status" class="mt-2 p-2 border rounded w-full"><option>Berfungsi</option><option>Tidak Berfungsi</option><option>Tidak Berkaitan</option></select>
+          <input id="pa_sbb" placeholder="Nyatakan sebab jika tidak berfungsi" class="mt-2 p-2 border rounded w-full hidden" />
+        </div>
+
+        <div class="bg-sky-200 p-4 rounded-lg border">
+          <label class="block font-medium">Status Penggantian</label>
+          <select id="pa_ganti" class="mt-2 p-2 border rounded w-full"><option>Ya</option><option>Tiada</option><option>Tidak Berkaitan</option></select>
+          <input id="pa_ganti_tarikh" type="date" class="mt-2 p-2 border rounded w-full hidden" />
+        </div>
+
+        <div class="bg-sky-200 p-4 rounded-lg border">
+          <label class="block font-medium">Status Pelupusan</label>
+          <select id="pa_lupus" class="mt-2 p-2 border rounded w-full"><option>Ya</option><option>Tiada</option><option>Tidak Berkaitan</option></select>
+          <input id="pa_lupus_tarikh" type="date" class="mt-2 p-2 border rounded w-full hidden" />
+        </div>
+      </div>
+
+      <!-- summary -->
+      <div class="flex gap-4 mb-4">
+        <div class="p-3 bg-sky-50 rounded-md flex-1 text-center">
+          <div class="text-sm text-slate-500">Jumlah Keseluruhan</div>
+          <div id="pa_total" class="text-2xl font-bold text-sky-600">0</div>
+        </div>
+        <div class="p-3 bg-emerald-50 rounded-md flex-1 text-center">
+          <div class="text-sm text-slate-500">Peranti Berfungsi</div>
+          <div id="pa_ok" class="text-2xl font-bold text-emerald-600">0</div>
+        </div>
+        <div class="p-3 bg-red-50 rounded-md flex-1 text-center">
+          <div class="text-sm text-slate-500">Peranti Rosak</div>
+          <div id="pa_broken" class="text-2xl font-bold text-red-600">0</div>
+        </div>
+      </div>
+
+      <!-- broken list (explicit) -->
+      <div id="pa_broken_list" class="mb-4"></div>
+
+      <!-- table -->
+      <div class="bg-white rounded-lg border overflow-auto table-wrap">
+        <div class="flex items-center justify-between p-4 border-b sticky-header bg-white">
+          <div class="font-semibold">Senarai Peranti</div>
+          <div class="flex gap-2">
+            <button id="pa_add" class="btn bg-amber-500 text-white px-3 py-1 rounded shadow"></i>+ Tambah Peranti</button>
+          </div>
+        </div>
+        <table class="w-full text-sm">
+          <thead class="bg-sky-100 text-slate-700">
+            <tr>
+              <th class="p-2 border">#</th>
+              <th class="p-2 border">Jenis Peranti</th>
+              <th class="p-2 border">Jenama</th>
+              <th class="p-2 border">Model</th>
+              <th class="p-2 border">No. Siri Pendaftaran</th>
+              <th class="p-2 border">Status</th>
+              <th class="p-2 border text-center">Tindakan</th>
+            </tr>
+          </thead>
+          <tbody id="pa_tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- MAKMAL -->
+    <section id="mk" class="section card mb-6 hidden">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-white text-2xl font-semibold">MAKMAL KOMPUTER</h2>
+        
+        <div id="mk_save_status" class="justify-between mk-badge mk-hidden"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-4">
+        <div class="bg-sky-200 p-4 rounded-lg border">
+          <label class="block font-medium">Status Makmal</label>
+          <select id="mk_status" class="mt-2 p-2 border rounded w-full"><option>Berfungsi</option><option>Tidak Berfungsi</option><option>Tidak Berkaitan</option></select>
+          <input id="mk_sbb" placeholder="Nyatakan sebab jika tidak berfungsi" class="mt-2 p-2 border rounded w-full hidden" />
+        </div>
+
+        <div class="bg-sky-200 p-4 rounded-lg border">
+          <label class="block font-medium">Model Bangunan</label>
+          <select id="mk_building" class="mt-2 p-2 border rounded w-full">
+            <option>3A (21/21 Komputer Peribadi)</option>
+            <option>2A (21 Komputer Peribadi)</option>
+            <option>2B (21 Komputer Peribadi Bertiang)</option>
+            <option>Tidak Berkaitan</option>
+          </select>
+        </div>
+
+        <div class="bg-sky-200 p-4 rounded-lg border">
+          <label class="block font-medium">Lokasi</label>
+          <select id="mk_location" class="mt-2 p-2 border rounded w-full">
+            <option>Dalam bangunan sekolah</option>
+            <option>Berasingan dari bangunan sekolah</option>
+            <option>Tidak Berkaitan</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <div class="bg-sky-200 p-4 rounded-lg border">
+          <label class="block font-medium">Status Penggantian</label>
+          <select id="mk_ganti" class="mt-2 p-2 border rounded w-full"><option>Tiada</option><option>Ya</option><option>Tidak Berkaitan</option></select>
+          <input id="mk_ganti_tarikh" type="date" class="mt-2 p-2 border rounded w-full hidden" />
+        </div>
+        <div class="bg-sky-200 p-4 rounded-lg border">
+          <label class="block font-medium">Status Pelupusan</label>
+          <select id="mk_lupus" class="mt-2 p-2 border rounded w-full"><option>Tiada</option><option>Ya</option><option>Tidak Berkaitan</option></select>
+          <input id="mk_lupus_tarikh" type="date" class="mt-2 p-2 border rounded w-full hidden" />
+        </div>
+        <div></div>
+      </div>
+
+      <!-- summary -->
+      <div class="flex gap-4 mb-4">
+        <div class="p-3 bg-sky-50 rounded-md flex-1 text-center">
+          <div class="text-sm text-slate-500">Jumlah Keseluruhan</div>
+          <div id="mk_total" class="text-2xl font-bold text-sky-600">0</div>
+        </div>
+        <div class="p-3 bg-emerald-50 rounded-md flex-1 text-center">
+          <div class="text-sm text-slate-500">Peranti Berfungsi</div>
+          <div id="mk_ok" class="text-2xl font-bold text-emerald-600">0</div>
+        </div>
+        <div class="p-3 bg-red-50 rounded-md flex-1 text-center">
+          <div class="text-sm text-slate-500">Peranti Rosak</div>
+          <div id="mk_broken" class="text-2xl font-bold text-red-600">0</div>
+        </div>
+      </div>
+
+      <!-- broken list (explicit) -->
+      <div id="mk_broken_list" class="mb-4"></div>
+
+      <!-- table -->
+      <div class="bg-white rounded-lg border overflow-auto table-wrap">
+        <div class="flex items-center justify-between p-4 border-b sticky-header bg-white">
+          <div class="font-semibold">Senarai Peranti</div>
+          <div class="flex gap-2">
+            <button id="mk_add" class="btn bg-amber-500 text-white px-3 py-1 rounded shadow"></i>+ Tambah Peranti</button>
+            
+          </div>
+        </div>
+        <table class="w-full text-sm">
+          <thead class="bg-sky-50 text-slate-700">
+            <tr>
+              <th class="p-2 border">#</th>
+              <th class="p-2 border">Jenis Peranti</th>
+              <th class="p-2 border">Jenama</th>
+              <th class="p-2 border">Model</th>
+              <th class="p-2 border">No. Siri</th>
+              <th class="p-2 border">Status</th>
+              <th class="p-2 border text-center">Tindakan</th>
+            </tr>
+          </thead>
+          <tbody id="mk_tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PdP -->
+<section id="pdp" class="section card mb-6 hidden">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-white text-2xl font-semibold mb-4">PENGAJARAN DAN PEMBELAJARAN (PdP)</h2>
+  
+  <div id="pdp_save_status" class="justify-between pdp-badge pdp-hidden"></div>
+  </div>
+
+
+  <div id="pdp_container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- ======================= FASA 1 ======================= -->
+    <div class="card p-4 border rounded-lg bg-sky-200 shadow">
+      <h3 class="text-lg font-semibold mb-3 text-sky-700">FASA 1</h3>
+
+      <div class="mb-3">
+        <label class="block font-medium">Syarikat Sewaan</label>
+        <input id="pdp_company_1" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div>
+          <label class="block font-medium">Tarikh Mula Sewaan</label>
+          <input id="pdp_start_1" type="date" class="mt-2 p-2 border rounded w-full" />
+        </div>
+        <div>
+          <label class="block font-medium">Tarikh Tamat Sewaan</label>
+          <input id="pdp_end_1" type="date" class="mt-2 p-2 border rounded w-full" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div><label class="block font-medium">Laptop</label><input id="pdp_laptop_1" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Printer</label><input id="pdp_printer_1" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Projektor</label><input id="pdp_projector_1" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Charging Cart</label><input id="pdp_cart_1" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+      </div>
+
+      <div class="mb-3">
+        <label class="block font-medium">Tarikh Penyelenggaraan (PM)</label>
+        <input id="pdp_pm_1" type="date" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+    </div>
+
+    <!-- ======================= FASA 2 ======================= -->
+    <div class="card p-4 border rounded-lg bg-sky-200 shadow">
+      <h3 class="text-lg font-semibold mb-3 text-sky-700">FASA 2</h3>
+
+      <div class="mb-3">
+        <label class="block font-medium">Syarikat Sewaan</label>
+        <input id="pdp_company_2" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div><label class="block font-medium">Tarikh Mula Sewaan</label><input id="pdp_start_2" type="date" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Tarikh Tamat Sewaan</label><input id="pdp_end_2" type="date" class="mt-2 p-2 border rounded w-full" /></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div><label class="block font-medium">Laptop</label><input id="pdp_laptop_2" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Printer</label><input id="pdp_printer_2" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Projektor</label><input id="pdp_projector_2" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Charging Cart</label><input id="pdp_cart_2" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+      </div>
+
+      <div class="mb-3">
+        <label class="block font-medium">Tarikh Penyelenggaraan (PM)</label>
+        <input id="pdp_pm_2" type="date" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+    </div>
+
+    <!-- ======================= FASA 3 ======================= -->
+    <div class="card p-4 border rounded-lg bg-sky-200 shadow">
+      <h3 class="text-lg font-semibold mb-3 text-sky-700">FASA 3</h3>
+
+      <div class="mb-3">
+        <label class="block font-medium">Syarikat Sewaan</label>
+        <input id="pdp_company_3" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div><label class="block font-medium">Tarikh Mula Sewaan</label><input id="pdp_start_3" type="date" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Tarikh Tamat Sewaan</label><input id="pdp_end_3" type="date" class="mt-2 p-2 border rounded w-full" /></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div><label class="block font-medium">Laptop</label><input id="pdp_laptop_3" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Printer</label><input id="pdp_printer_3" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Projektor</label><input id="pdp_projector_3" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Charging Cart</label><input id="pdp_cart_3" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+      </div>
+
+      <div class="mb-3">
+        <label class="block font-medium">Tarikh Penyelenggaraan (PM)</label>
+        <input id="pdp_pm_3" type="date" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+    </div>
+
+    <!-- ======================= FASA 4 ======================= -->
+    <div class="card p-4 border rounded-lg bg-sky-200 shadow">
+      <h3 class="text-lg font-semibold mb-3 text-sky-700">FASA 4</h3>
+
+      <div class="mb-3">
+        <label class="block font-medium">Syarikat Sewaan</label>
+        <input id="pdp_company_4" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div><label class="block font-medium">Tarikh Mula Sewaan</label><input id="pdp_start_4" type="date" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Tarikh Tamat Sewaan</label><input id="pdp_end_4" type="date" class="mt-2 p-2 border rounded w-full" /></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div><label class="block font-medium">Laptop</label><input id="pdp_laptop_4" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Printer</label><input id="pdp_printer_4" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Projektor</label><input id="pdp_projector_4" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Charging Cart</label><input id="pdp_cart_4" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+      </div>
+
+      <div class="mb-3">
+        <label class="block font-medium">Tarikh Penyelenggaraan (PM)</label>
+        <input id="pdp_pm_4" type="date" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- PdT -->
+<section id="pdt" class="section card mb-6 hidden">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-white text-2xl font-semibold mb-4">PENTADBIRAN (Pdt)</h2>
+  
+   <div id="pdt_status" class="justify-between pdt-badge pdt-hidden"></div>
+</div>
+
+  <div id="pdt_container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- ======================= FASA 1 ======================= -->
+    <div class="card p-4 border rounded-lg bg-sky-200 shadow">
+      <h3 class="text-lg font-semibold mb-3 text-sky-700">FASA 1</h3>
+
+      <div class="mb-3">
+        <label class="block font-medium">Syarikat Sewaan</label>
+        <input id="pdt_company_1" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div>
+          <label class="block font-medium">Tarikh Mula Sewaan</label>
+          <input id="pdt_start_1" type="date" class="mt-2 p-2 border rounded w-full" />
+        </div>
+        <div>
+          <label class="block font-medium">Tarikh Tamat Sewaan</label>
+          <input id="pdt_end_1" type="date" class="mt-2 p-2 border rounded w-full" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div>
+          <label class="block font-medium">Komputer Peribadi (PC)</label>
+          <input id="pdt_pc_1" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/>
+        </div>
+        <div>
+          <label class="block font-medium">Pencetak (Printer)</label>
+          <input id="pdt_printer_1" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="block font-medium">Tarikh Penyelenggaraan (PM)</label>
+        <input id="pdt_pm_1" type="date" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+    </div>
+
+    <!-- ======================= FASA 2 ======================= -->
+    <div class="card p-4 border rounded-lg bg-sky-200 shadow">
+      <h3 class="text-lg font-semibold mb-3 text-sky-700">FASA 2</h3>
+
+      <div class="mb-3">
+        <label class="block font-medium">Syarikat Sewaan</label>
+        <input id="pdt_company_2" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div>
+          <label class="block font-medium">Tarikh Mula Sewaan</label>
+          <input id="pdt_start_2" type="date" class="mt-2 p-2 border rounded w-full" />
+        </div>
+        <div>
+          <label class="block font-medium">Tarikh Tamat Sewaan</label>
+          <input id="pdt_end_2" type="date" class="mt-2 p-2 border rounded w-full" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-3">
+        <div>
+          <label class="block font-medium">Komputer Peribadi (PC)</label>
+          <input id="pdt_pc_2" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/>
+        </div>
+        <div>
+          <label class="block font-medium">Pencetak (Printer)</label>
+          <input id="pdt_printer_2" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="block font-medium">Tarikh Penyelenggaraan (PM)</label>
+        <input id="pdt_pm_2" type="date" class="mt-2 p-2 border rounded w-full" />
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- PERANTI CERDIK -->
+    <section id="pc" class="section card mb-6 hidden">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-white text-2xl font-semibold">PERANTI CERDIK</h2>
+
+        <div id="pc_status" class="justify-between pc-badge pc-hidden"></div>
+      </div>
+
+      <div class="card bg-sky-200">
+      <div class="grid md:grid-cols-3 gap-4 mb-4">
+        <div><label class="block font-medium">Jenama</label><input id="pc_brand" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Model</label><input id="pc_model" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Jumlah</label><input id="pc_total_input" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full" /></div>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-4 mb-4">
+        <div><label class="block font-medium">Berfungsi</label><input id="pc_ok_input" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Rosak / Lupus</label><input id="pc_broken_input" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Hilang</label><input id="pc_lost_input" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Tidak Dikesan</label><input id="pc_missing_input" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full"/></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <div><label class="block font-medium">Tarikh Penyelenggaraan</label><input id="pc_pm" type="date" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Tarikh Seliaan</label><input id="pc_supervise" type="date" class="mt-2 p-2 border rounded w-full"/></div>
+      </div>
+
+    </section>
+
+    <!-- PERANTI GURU -->
+    <section id="pg" class="section card mb-6 hidden">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-white text-2xl font-semibold">PERANTI GURU</h2>
+      
+        <div id="pg_status" class="justify-between pg-badge pg-hidden"></div>
+      </div>
+
+      <div class="card bg-sky-200">
+      <div class="grid md:grid-cols-3 gap-4 mb-4">
+        <div><label class="block font-medium">Syarikat Sewaan</label><input id="pg_company" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Tarikh Mula Sewaan</label><input id="pg_start" type="date" class="mt-2 p-2 border rounded w-full"/></div>
+        <div><label class="block font-medium">Tarikh Tamat Sewaan</label><input id="pg_end" type="date" class="mt-2 p-2 border rounded w-full"/></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-4">
+        <div><label class="block font-medium">Jenama</label><input id="pg_brand" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Model</label><input id="pg_model" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Jumlah</label><input id="pg_total" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full" /></div>
+      </div>
+    </section>
+
+
+    <!-- INTERNET -->
+    <section id="net" class="section card mb-6 hidden">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-white text-2xl font-semibold">INTERNET</h2>
+
+        <div id="net_status" class="justify-between net-badge net-hidden"></div>
+      </div>
+
+      <div class="card bg-sky-200">
+      <div class="grid md:grid-cols-4 gap-4 mb-4">
+        <div>
+          <label class="block font-medium">ISP</label>
+          <select id="net_isp" class="mt-2 p-2 border rounded w-full">
+            <option>TM Unifi</option><option>YTL YES</option><option>CelcomDigi</option><option>MAXIS</option><option>UMobile</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium">Teknologi</label>
+          <select id="net_tech" class="mt-2 p-2 border rounded w-full"><option>Broadband</option><option>Fibre Optic</option></select>
+        </div>
+        <div>
+          <label class="block font-medium">Kelajuan</label>
+          <select id="net_speed" class="mt-2 p-2 border rounded w-full"><option>300 Mbps</option><option>800 Mbps</option><option>1 Gbps</option><option>2 Gbps</option></select>
+        </div>
+        <div>
+          <label class="block font-medium">Bilangan Router/Modem</label>
+          <input id="net_count" type="number" min="0" value="0" class="mt-2 p-2 border rounded w-full" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <div><label class="block font-medium">Kontrak — Mula</label><input id="net_start" type="date" class="mt-2 p-2 border rounded w-full" /></div>
+        <div><label class="block font-medium">Kontrak — Tamat</label><input id="net_end" type="date" class="mt-2 p-2 border rounded w-full" /></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+
+<!-- SCRIPT: logic + persistence -->
+<script>
+/* Utilities */
+function genId(){return'id_'+Date.now()+'_'+Math.floor(Math.random()*10000);}
+function $(id){return document.getElementById(id);}
+function saveToStorage(key,val){localStorage.setItem(key,JSON.stringify(val));}
+function loadFromStorage(key){try{return JSON.parse(localStorage.getItem(key)||'null');}catch(e){return null;}}
+function toast(msg){try{alert(msg);}catch(e){console.log(msg);}}
+
+/* SPA nav */
+document.querySelectorAll('.nav-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.section').forEach(s=>s.classList.add('hidden'));const t=btn.dataset.target;$(t).classList.remove('hidden');document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('bg-orange-500','font-bold'));btn.classList.add('bg-orange-500','font-bold');window.scrollTo({top:0,behavior:'smooth'});});});
+document.querySelector('.nav-btn[data-target="pa"]').click();
+
+/* PUSAT AKSES */
+(function(){
+  const PA_KEY='pa_data_full_v2',DEBOUNCE_DELAY=1500,SERVER_URL='https://yourdomain.com/api/save_pa';
+  let fadeTimer=null;
+  let paData=pa_loadFromStorage(PA_KEY)||{status:'Berfungsi',ganti:'Tidak',lupus:'Tidak',ganti_tarikh:'',lupus_tarikh:'',devices:[]};
+  const statusBox=document.getElementById("pa_save_status");
+  const paStatus=document.getElementById('pa_status');
+  const paSebabWrapper=document.getElementById('pa_sbb');
+  paStatus&&paStatus.addEventListener('change',()=>{if(paStatus.value==='Tidak Berfungsi'){paSebabWrapper.style.display='block';}else{paSebabWrapper.style.display='none';document.getElementById('pa_sbb').value='';}});
+  function showStatus(text,color="bg-slate-700",withSpinner=false){if(!statusBox)return;clearTimeout(fadeTimer);let spinnerHTML=withSpinner?'<span class="pa-spinner animate-spin mr-2 inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>':"";statusBox.innerHTML=spinnerHTML+text;statusBox.className=`pa-badge ${color}`;statusBox.classList.remove("pa-hidden");if(!withSpinner){fadeTimer=setTimeout(()=>statusBox.classList.add("pa-hidden"),3000);}}
+  function markUnsaved(){showStatus("✖ Tidak Disimpan","bg-red-600");}
+  function markSaved(){showStatus("✔ Disimpan (Local + Server)","bg-emerald-700");}
+  function pa$(id){return document.getElementById(id);}
+  function pa_genId(){return'pa_'+Date.now()+Math.random().toString(16).slice(2);}
+  function pa_saveToStorage(key,data){localStorage.setItem(key,JSON.stringify(data));markSaved();}
+  function pa_loadFromStorage(key){const raw=localStorage.getItem(key);return raw?JSON.parse(raw):null;}
+  function pa_uploadToServer(data){showStatus("Menyimpan ke server...","bg-blue-600",true);fetch(SERVER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(res=>res.json()).then(resp=>{markSaved();}).catch(err=>{showStatus("⚠ Gagal simpan server","bg-red-700");console.error("Upload PA error:",err);});}
+  function pa_debounce(fn,delay){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),delay);};}
+  const pa_autoSave=pa_debounce(()=>{pa_saveToStorage(PA_KEY,paData);pa_uploadToServer(paData);},DEBOUNCE_DELAY);
+  function pa_flagChange(){markUnsaved();pa_autoSave();}
+  function pa_renderSelectValue(opts,val){return opts.map(o=>`<option ${o===val?'selected':''}>${o}</option>`).join('');}
+  function pa_renderRow(row,index){const tr=document.createElement('tr');tr.className='border';tr.dataset.id=row.id;tr.classList.add(row.status==='Berfungsi'?'status-berfungsi':row.status==='Rosak'?'status-rosak':'');tr.innerHTML=`<td class="p-2 border text-sm">${index+1}</td><td class="p-2 border"><select class="w-full p-1 border rounded jenis">${pa_renderSelectValue(['Komputer Peribadi (PC)','Pencetak (Printer)','Projektor'],row.jenis)}</select></td><td class="p-2 border"><input class="w-full p-1 border rounded jenama" value="${row.jenama||''}"></td><td class="p-2 border"><input class="w-full p-1 border rounded model" value="${row.model||''}"></td><td class="p-2 border"><input class="w-full p-1 border rounded nosiri" value="${row.nosiri||''}"></td><td class="p-2 border"><select class="w-full p-1 border rounded status"><option ${row.status==='Berfungsi'?'selected':''}>Berfungsi</option><option ${row.status==='Rosak'?'selected':''}>Rosak</option></select></td><td class="p-2 border text-center"><button class="pa_del bg-red-500 text-white px-2 py-1 rounded">Padam</button></td>`;return tr;}
+  function pa_updatePAStats(){if(paData.status==='Tidak Berkaitan'){['pa_total','pa_ok','pa_broken'].forEach(id=>pa$(id)&&(pa$(id).textContent=''));if(pa$('pa_broken_list'))pa$('pa_broken_list').innerHTML='';return;}const t=paData.devices.length;const ok=paData.devices.filter(x=>x.status==='Berfungsi').length;const b=paData.devices.filter(x=>x.status==='Rosak').length;if(pa$('pa_total'))pa$('pa_total').textContent=t;if(pa$('pa_ok'))pa$('pa_ok').textContent=ok;if(pa$('pa_broken'))pa$('pa_broken').textContent=b;if(pa$('pa_broken_list')){pa$('pa_broken_list').innerHTML=b===0?'':`<div class="p-3 bg-red-50 rounded-md"><div class="text-red-700 font-bold mb-1">Senarai Peranti Rosak</div><ul class="ml-4 text-sm">${paData.devices.filter(x=>x.status==='Rosak').map(x=>`<li>${x.jenis} — ${x.jenama||'-'} ${x.model?'/ '+x.model:''} (${x.nosiri||'-'})</li>`).join('')}</ul></div>`;}}
+  function pa_renderPA(){const tbody=pa$('pa_tbody');if(!tbody)return;tbody.innerHTML='';if(paData.status!=='Tidak Berkaitan'){paData.devices.forEach((row,i)=>tbody.appendChild(pa_renderRow(row,i))); }pa_updatePAStats();markSaved();}
+  function pa_applyStatusFields(){if(pa$('pa_status'))pa$('pa_status').value=paData.status;if(pa$('pa_ganti'))pa$('pa_ganti').value=paData.ganti;if(pa$('pa_lupus'))pa$('pa_lupus').value=paData.lupus;if(pa$('pa_ganti_tarikh'))pa$('pa_ganti_tarikh').value=paData.ganti_tarikh;if(pa$('pa_lupus_tarikh'))pa$('pa_lupus_tarikh').value=paData.lupus_tarikh;if(pa$('pa_ganti_tarikh'))pa$('pa_ganti_tarikh').classList.toggle('hidden',paData.ganti!=='Ya');if(pa$('pa_lupus_tarikh'))pa$('pa_lupus_tarikh').classList.toggle('hidden',paData.lupus!=='Ya');}
+  if(pa$('pa_status'))pa$('pa_status').addEventListener('change',e=>{paData.status=e.target.value;if(paData.status==='Tidak Berkaitan'){paData.ganti='Tidak Berkaitan';paData.lupus='Tidak Berkaitan';paData.ganti_tarikh='';paData.lupus_tarikh='';paData.devices=[];}else{if(paData.ganti==='Tidak Berkaitan')paData.ganti='Tidak';if(paData.lupus==='Tidak Berkaitan')paData.lupus='Tidak';}pa_applyStatusFields();pa_renderPA();pa_flagChange();});
+  if(pa$('pa_ganti'))pa$('pa_ganti').addEventListener('change',e=>{paData.ganti=e.target.value;if(pa$('pa_ganti_tarikh'))pa$('pa_ganti_tarikh').classList.toggle('hidden',paData.ganti!=='Ya');pa_flagChange();});
+  if(pa$('pa_ganti_tarikh'))pa$('pa_ganti_tarikh').addEventListener('input',e=>{paData.ganti_tarikh=e.target.value;pa_flagChange();});
+  if(pa$('pa_lupus'))pa$('pa_lupus').addEventListener('change',e=>{paData.lupus=e.target.value;if(pa$('pa_lupus_tarikh'))pa$('pa_lupus_tarikh').classList.toggle('hidden',paData.lupus!=='Ya');pa_flagChange();});
+  if(pa$('pa_lupus_tarikh'))pa$('pa_lupus_tarikh').addEventListener('input',e=>{paData.lupus_tarikh=e.target.value;pa_flagChange();});
+  if(pa$('pa_add'))pa$('pa_add').addEventListener('click',()=>{if(paData.status==='Tidak Berkaitan')return;const row={id:pa_genId(),jenis:'Komputer Peribadi (PC)',jenama:'',model:'',nosiri:'',status:'Berfungsi'};paData.devices.push(row);pa_renderPA();pa_flagChange();});
+  if(pa$('pa_tbody')){pa$('pa_tbody').addEventListener('input',e=>{const tr=e.target.closest('tr');if(!tr)return;const idx=paData.devices.findIndex(x=>x.id===tr.dataset.id);if(idx===-1)return;['jenis','jenama','model','nosiri','status'].forEach(f=>{const el=tr.querySelector('.'+f);if(el)paData.devices[idx][f]=el.value;});pa_renderPA();pa_flagChange();});pa$('pa_tbody').addEventListener('click',e=>{if(!e.target.closest('.pa_del'))return;const tr=e.target.closest('tr');const id=tr.dataset.id;paData.devices=paData.devices.filter(x=>x.id!==id);pa_renderPA();pa_flagChange();});}
+  document.addEventListener('DOMContentLoaded',()=>{pa_applyStatusFields();pa_renderPA();showStatus("Sedia untuk mengisi","bg-slate-600");});
+})();
+
+/* MAKMAL KOMPUTER */
+(function(){
+  const MK_KEY='mk_data_full_v1',DEBOUNCE_DELAY=1500,SERVER_URL='https://yourdomain.com/api/save_mk';
+  let fadeTimer=null;
+  function mk_loadFromStorage(key){const raw=localStorage.getItem(key);return raw?JSON.parse(raw):null;}
+  function mk_saveToStorage(key,data){localStorage.setItem(key,JSON.stringify(data));markSaved();}
+  let mkData=mk_loadFromStorage(MK_KEY)||{status:'Berfungsi',sbb:'',building:'3A (21/21 Komputer Peribadi)',location:'Dalam bangunan sekolah',ganti:'Tiada',lupus:'Tiada',ganti_tarikh:'',lupus_tarikh:'',devices:[]};
+  const statusBox=document.getElementById("mk_save_status");
+  const mkStatus=document.getElementById('mk_status');
+  const mkSebabWrapper=document.getElementById('mk_sbb');
+  mkStatus&&mkStatus.addEventListener('change',()=>{if(mkStatus.value==='Tidak Berfungsi'){mkSebabWrapper.style.display='block';}else{mkSebabWrapper.style.display='none';document.getElementById('mk_sbb').value='';}});
+  function showStatus(text,color="bg-slate-700",withSpinner=false){if(!statusBox)return;clearTimeout(fadeTimer);let spinner=withSpinner?'<span class="mk-spinner animate-spin mr-2 inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>':"";statusBox.innerHTML=spinner+text;statusBox.className=`mk-badge ${color}`;statusBox.classList.remove("mk-hidden");if(!withSpinner){fadeTimer=setTimeout(()=>statusBox.classList.add("mk-hidden"),3000);}}
+  function markUnsaved(){showStatus("✖ Tidak Disimpan","bg-red-600");}
+  function markSaved(){showStatus("✔ Disimpan (Local + Server)","bg-emerald-700");}
+  function mk$(id){return document.getElementById(id);}
+  function mk_genId(){return'mk_'+Date.now()+Math.random().toString(16).slice(2);}
+  function mk_uploadToServer(data){showStatus("Menyimpan ke server...","bg-blue-600",true);fetch(SERVER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>r.json()).then(res=>{markSaved();}).catch(err=>{showStatus("⚠ Gagal simpan server","bg-red-700");console.error("Upload MK ERROR:",err);});}
+  function mk_debounce(fn,delay){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),delay);};}
+  const mk_autoSave=mk_debounce(()=>{mk_saveToStorage(MK_KEY,mkData);mk_uploadToServer(mkData);},DEBOUNCE_DELAY);
+  function mk_flagChange(){markUnsaved();mk_autoSave();}
+  function mk_renderRow(row,index){const tr=document.createElement('tr');tr.className='border';tr.dataset.id=row.id;tr.innerHTML=`<td class="p-2 border">${index+1}</td><td class="p-2 border"><select class="jenis w-full p-1 border rounded"><option ${row.jenis==='Komputer Peribadi (PC)'?'selected':''}>Komputer Peribadi (PC)</option><option ${row.jenis==='Pencetak (Printer)'?'selected':''}>Pencetak (Printer)</option><option ${row.jenis==='Projektor'?'selected':''}>Projektor</option></select></td><td class="p-2 border"><input class="jenama w-full p-1 border rounded" value="${row.jenama||''}"></td><td class="p-2 border"><input class="model w-full p-1 border rounded" value="${row.model||''}"></td><td class="p-2 border"><input class="nosiri w-full p-1 border rounded" value="${row.nosiri||''}"></td><td class="p-2 border"><select class="status w-full p-1 border rounded"><option ${row.status==='Berfungsi'?'selected':''}>Berfungsi</option><option ${row.status==='Rosak'?'selected':''}>Rosak</option></select></td><td class="p-2 border text-center"><button class="mk_del bg-red-500 text-white px-2 py-1 rounded">Padam</button></td>`;return tr;}
+  function mk_updateStats(){if(mkData.status==='Tidak Berkaitan'){if(mk$('mk_total'))mk$('mk_total').textContent='';if(mk$('mk_ok'))mk$('mk_ok').textContent='';if(mk$('mk_broken'))mk$('mk_broken').textContent='';if(mk$('mk_broken_list'))mk$('mk_broken_list').innerHTML='';return;}const total=mkData.devices.length;const ok=mkData.devices.filter(x=>x.status==='Berfungsi').length;const broken=mkData.devices.filter(x=>x.status==='Rosak').length;if(mk$('mk_total'))mk$('mk_total').textContent=total;if(mk$('mk_ok'))mk$('mk_ok').textContent=ok;if(mk$('mk_broken'))mk$('mk_broken').textContent=broken;if(mk$('mk_broken_list')){mk$('mk_broken_list').innerHTML=broken===0?'':`<div class="p-3 bg-red-50 rounded-md"><div class="text-red-700 font-bold mb-1">Senarai Peranti Rosak</div><ul class="ml-4 text-sm">${mkData.devices.filter(x=>x.status==='Rosak').map(x=>`<li>${x.jenis} — ${x.jenama||'-'} ${x.model?('/ '+x.model):''} (${x.nosiri||'-'})</li>`).join('')}</ul></div>`;}}
+  function mk_render(){const tbody=mk$('mk_tbody');if(!tbody)return;tbody.innerHTML='';if(mkData.status!=='Tidak Berkaitan'){mkData.devices.forEach((row,i)=>tbody.appendChild(mk_renderRow(row,i)));}mk_updateStats();markSaved();}
+  function mk_applyFields(){if(!mk$('mk_status'))return;mk$('mk_status').value=mkData.status||'Berfungsi';if(mk$('mk_sbb')){mk$('mk_sbb').value=mkData.sbb||'';mk$('mk_sbb').classList.toggle('hidden',mkData.status!=='Rosak');}if(mk$('mk_building'))mk$('mk_building').value=mkData.building||'Tidak Berkaitan';if(mk$('mk_location'))mk$('mk_location').value=mkData.location||'Tidak Berkaitan';if(mk$('mk_ganti'))mk$('mk_ganti').value=mkData.ganti||'Tiada';if(mk$('mk_ganti_tarikh')){mk$('mk_ganti_tarikh').value=mkData.ganti_tarikh||'';mk$('mk_ganti_tarikh').classList.toggle('hidden',mkData.ganti!=='Ya');}if(mk$('mk_lupus'))mk$('mk_lupus').value=mkData.lupus||'Tiada';if(mk$('mk_lupus_tarikh')){mk$('mk_lupus_tarikh').value=mkData.lupus_tarikh||'';mk$('mk_lupus_tarikh').classList.toggle('hidden',mkData.lupus!=='Ya');}}
+  if(mk$('mk_status'))mk$('mk_status').addEventListener('change',e=>{mkData.status=e.target.value;if(mkData.status==='Tidak Berkaitan'){mkData.building='Tidak Berkaitan';mkData.location='Tidak Berkaitan';mkData.ganti='Tidak Berkaitan';mkData.lupus='Tidak Berkaitan';mkData.ganti_tarikh='';mkData.lupus_tarikh='';mkData.sbb='';mkData.devices=[];}else{if(mkData.building==='Tidak Berkaitan')mkData.building='3A (21/21 Komputer Peribadi)';if(mkData.location==='Tidak Berkaitan')mkData.location='Dalam bangunan sekolah';if(mkData.ganti==='Tidak Berkaitan')mkData.ganti='Tiada';if(mkData.lupus==='Tidak Berkaitan')mkData.lupus='Tiada';}mk_applyFields();mk_render();mk_flagChange();});
+  if(mk$('mk_sbb'))mk$('mk_sbb').addEventListener('input',e=>{mkData.sbb=e.target.value;mk_flagChange();});
+  if(mk$('mk_building'))mk$('mk_building').addEventListener('change',e=>{mkData.building=e.target.value;mk_flagChange();});
+  if(mk$('mk_location'))mk$('mk_location').addEventListener('change',e=>{mkData.location=e.target.value;mk_flagChange();});
+  if(mk$('mk_ganti'))mk$('mk_ganti').addEventListener('change',e=>{mkData.ganti=e.target.value;if(mk$('mk_ganti_tarikh'))mk$('mk_ganti_tarikh').classList.toggle('hidden',mkData.ganti!=='Ya');mk_flagChange();});
+  if(mk$('mk_ganti_tarikh'))mk$('mk_ganti_tarikh').addEventListener('input',e=>{mkData.ganti_tarikh=e.target.value;mk_flagChange();});
+  if(mk$('mk_lupus'))mk$('mk_lupus').addEventListener('change',e=>{mkData.lupus=e.target.value;if(mk$('mk_lupus_tarikh'))mk$('mk_lupus_tarikh').classList.toggle('hidden',mkData.lupus!=='Ya');mk_flagChange();});
+  if(mk$('mk_lupus_tarikh'))mk$('mk_lupus_tarikh').addEventListener('input',e=>{mkData.lupus_tarikh=e.target.value;mk_flagChange();});
+  if(mk$('mk_add'))mk$('mk_add').addEventListener('click',()=>{if(mkData.status==='Tidak Berkaitan')return;mkData.devices.push({id:mk_genId(),jenis:'Komputer Peribadi (PC)',jenama:'',model:'',nosiri:'',status:'Berfungsi'});mk_render();mk_flagChange();});
+  if(mk$('mk_tbody')){mk$('mk_tbody').addEventListener('input',e=>{const tr=e.target.closest('tr');if(!tr)return;const id=tr.dataset.id;const idx=mkData.devices.findIndex(x=>x.id===id);if(idx===-1) return;['jenis','jenama','model','nosiri','status'].forEach(f=>{const el=tr.querySelector('.'+f);if(el)mkData.devices[idx][f]=el.value;});mk_render();mk_flagChange();});mk$('mk_tbody').addEventListener('click',e=>{if(!e.target.closest('.mk_del'))return;const tr=e.target.closest('tr');const id=tr.dataset.id;mkData.devices=mkData.devices.filter(x=>x.id!==id);mk_render();mk_flagChange();});}
+  document.addEventListener('DOMContentLoaded',()=>{mk_applyFields();mk_render();showStatus("Sedia untuk mengisi","bg-slate-600");});
+})();
+
+/* PdP */
+(function(){
+  const PDP_KEY='pdp_data_full_v1',DEBOUNCE_DELAY=1500,SERVER_URL='https://yourdomain.com/api/save_pdp';
+  let fadeTimer=null;
+  function pdp_loadFromStorage(key){const raw=localStorage.getItem(key);return raw?JSON.parse(raw):null;}
+  function pdp_saveToStorage(key,data){localStorage.setItem(key,JSON.stringify(data));markSaved();}
+  let pdpData=pdp_loadFromStorage(PDP_KEY)||{phases:[{company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''},{company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''},{company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''},{company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''}],notes:''};
+  const statusBox=document.getElementById("pdp_save_status");
+  function showStatus(text,colorClass="bg-slate-700",withSpinner=false){if(!statusBox)return;clearTimeout(fadeTimer);let spinnerHTML=withSpinner?'<span class="pdp-spinner animate-spin mr-2 inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>':"";statusBox.innerHTML=spinnerHTML+text;statusBox.className=`pdp-badge ${colorClass}`;statusBox.classList.remove("pdp-hidden");if(!withSpinner){fadeTimer=setTimeout(()=>statusBox.classList.add("pdp-hidden"),3000);}}
+  function markUnsaved(){showStatus("✖ Tidak Disimpan","bg-red-600");}
+  function markSaved(){showStatus("✔ Disimpan (Local + Server)","bg-emerald-700");}
+  function pdp$(id){return document.getElementById(id);}
+  function pdp_debounce(fn,delay){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),delay);};}
+  function pdp_uploadToServer(data){showStatus("Menyimpan ke server...","bg-blue-600",true);fetch(SERVER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>{if(!r.ok)throw new Error('Server returned '+r.status);return r.json().catch(()=>({ok:true}));}).then(res=>{markSaved();}).catch(err=>{showStatus("⚠ Gagal simpan server","bg-red-700");console.error("Upload PDP ERROR:",err);});}
+  const pdp_autoSave=pdp_debounce(()=>{pdp_saveToStorage(PDP_KEY,pdpData);pdp_uploadToServer(pdpData);},DEBOUNCE_DELAY);
+  function pdp_flagChange(){markUnsaved();pdp_autoSave();}
+  function pdp_applyFields(){for(let i=0;i<4;i++){const n=i+1;const p=pdpData.phases[i];if(pdp$('pdp_company_'+n))pdp$('pdp_company_'+n).value=p.company||'';if(pdp$('pdp_start_'+n))pdp$('pdp_start_'+n).value=p.start||'';if(pdp$('pdp_end_'+n))pdp$('pdp_end_'+n).value=p.end||'';if(pdp$('pdp_laptop_'+n))pdp$('pdp_laptop_'+n).value=p.laptop!=null?p.laptop:0;if(pdp$('pdp_printer_'+n))pdp$('pdp_printer_'+n).value=p.printer!=null?p.printer:0;if(pdp$('pdp_projector_'+n))pdp$('pdp_projector_'+n).value=p.projector!=null?p.projector:0;if(pdp$('pdp_cart_'+n))pdp$('pdp_cart_'+n).value=p.cart!=null?p.cart:0;if(pdp$('pdp_pm_'+n))pdp$('pdp_pm_'+n).value=p.pm||'';}pdp_updateSummary();}
+  function pdp_updateSummary(){const totals=pdpData.phases.reduce((acc,p)=>{acc.laptop+=Number(p.laptop||0);acc.printer+=Number(p.printer||0);acc.projector+=Number(p.projector||0);acc.cart+=Number(p.cart||0);return acc;},{laptop:0,printer:0,projector:0,cart:0});const summary=`L:${totals.laptop} P:${totals.printer} Pr:${totals.projector} C:${totals.cart}`;const sumEl=pdp$('pdp_summary');if(sumEl)sumEl.textContent=summary;}
+  function bindAllInputs(){for(let i=0;i<4;i++){const n=i+1;if(pdp$('pdp_company_'+n))pdp$('pdp_company_'+n).addEventListener('input',e=>{pdpData.phases[i].company=e.target.value;pdp_flagChange();pdp_updateSummary();});if(pdp$('pdp_start_'+n))pdp$('pdp_start_'+n).addEventListener('change',e=>{pdpData.phases[i].start=e.target.value;pdp_flagChange();});if(pdp$('pdp_end_'+n))pdp$('pdp_end_'+n).addEventListener('change',e=>{pdpData.phases[i].end=e.target.value;pdp_flagChange();});const numericIds=['laptop','printer','projector','cart'];numericIds.forEach(id=>{const el=pdp$(`pdp_${id}_${n}`);if(!el)return;el.addEventListener('input',e=>{let val=e.target.value;let num=parseInt(val);if(isNaN(num)||num<0)num=0;pdpData.phases[i][id]=num;pdp_flagChange();pdp_updateSummary();});});if(pdp$('pdp_pm_'+n))pdp$('pdp_pm_'+n).addEventListener('change',e=>{pdpData.phases[i].pm=e.target.value;pdp_flagChange();});}}
+  function pdp_resetPhase(index){if(index<0||index>3)return;pdpData.phases[index]={company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''};pdp_applyFields();pdp_flagChange();}
+  function pdp_resetAll(){pdpData={phases:[{company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''},{company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''},{company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''},{company:'',start:'',end:'',laptop:0,printer:0,projector:0,cart:0,pm:''}],notes:''};pdp_applyFields();pdp_flagChange();}
+  document.addEventListener('DOMContentLoaded',()=>{bindAllInputs();pdp_applyFields();showStatus("Sedia untuk mengisi","bg-slate-600");});
+  Object.defineProperty(window,'pdp_resetPhase',{value:pdp_resetPhase,writable:false});Object.defineProperty(window,'pdp_resetAll',{value:pdp_resetAll,writable:false});
+})();
+
+/* PdT */
+(function(){
+  const PDT_KEY='pdt_data_full_v1',DEBOUNCE_DELAY=1500,SERVER_URL='https://yourdomain.com/api/save_pdt';
+  let fadeTimer=null;
+  function pdt_loadFromStorage(key){const raw=localStorage.getItem(key);return raw?JSON.parse(raw):null;}
+  function pdt_saveToStorage(key,data){localStorage.setItem(key,JSON.stringify(data));markSaved();}
+  let pdtData=pdt_loadFromStorage(PDT_KEY)||{phases:[{company:'',start:'',end:'',pc:0,printer:0,pm:''},{company:'',start:'',end:'',pc:0,printer:0,pm:''}],notes:''};
+  const statusBox=document.getElementById("pdt_status");
+  function showStatus(text,color="bg-slate-700",withSpinner=false){if(!statusBox)return;clearTimeout(fadeTimer);let spinner=withSpinner?'<span class="animate-spin mr-2 inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>':"";statusBox.innerHTML=spinner+text;statusBox.className=`pdp-badge ${color}`;statusBox.classList.remove("pdp-hidden");if(!withSpinner){fadeTimer=setTimeout(()=>statusBox.classList.add("pdp-hidden"),3000);}}
+  function markUnsaved(){showStatus("✖ Tidak Disimpan","bg-red-600");}
+  function markSaved(){showStatus("✔ Disimpan (Local + Server)","bg-emerald-700");}
+  function pdt$(id){return document.getElementById(id);}
+  function pdt_debounce(fn,delay){let t;return(...args)=>{clearTimeout(t);t=setTimeout(()=>fn(...args),delay);};}
+  function pdt_uploadToServer(data){showStatus("Menyimpan ke server...","bg-blue-600",true);fetch(SERVER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>{if(!r.ok)throw new Error("Server error "+r.status);return r.json().catch(()=>({ok:true}));}).then(()=>{markSaved();}).catch(err=>{showStatus("⚠ Gagal simpan ke server","bg-red-700");console.error("Upload PdT ERROR:",err);});}
+  const pdt_autoSave=pdt_debounce(()=>{pdt_saveToStorage(PDT_KEY,pdtData);pdt_uploadToServer(pdtData);},DEBOUNCE_DELAY);
+  function pdt_flagChange(){markUnsaved();pdt_autoSave();}
+  function pdt_applyFields(){for(let i=0;i<2;i++){const n=i+1;const p=pdtData.phases[i];if(pdt$('pdt_company_'+n))pdt$('pdt_company_'+n).value=p.company||'';if(pdt$('pdt_start_'+n))pdt$('pdt_start_'+n).value=p.start||'';if(pdt$('pdt_end_'+n))pdt$('pdt_end_'+n).value=p.end||'';if(pdt$('pdt_pc_'+n))pdt$('pdt_pc_'+n).value=p.pc!=null?p.pc:0;if(pdt$('pdt_printer_'+n))pdt$('pdt_printer_'+n).value=p.printer!=null?p.printer:0;if(pdt$('pdt_pm_'+n))pdt$('pdt_pm_'+n).value=p.pm||'';}pdt_updateSummary();}
+  function pdt_updateSummary(){const totals=pdtData.phases.reduce((acc,p)=>{acc.pc+=Number(p.pc||0);acc.printer+=Number(p.printer||0);return acc;},{pc:0,printer:0});const sumEl=pdt$('pdt_summary');if(sumEl)sumEl.textContent=`PC:${totals.pc} P:${totals.printer}`;}
+  function bindAllInputs(){for(let i=0;i<2;i++){const n=i+1;if(pdt$('pdt_company_'+n))pdt$('pdt_company_'+n).addEventListener('input',e=>{pdtData.phases[i].company=e.target.value;pdt_flagChange();});if(pdt$('pdt_start_'+n))pdt$('pdt_start_'+n).addEventListener('change',e=>{pdtData.phases[i].start=e.target.value;pdt_flagChange();});if(pdt$('pdt_end_'+n))pdt$('pdt_end_'+n).addEventListener('change',e=>{pdtData.phases[i].end=e.target.value;pdt_flagChange();});const numericIds=['pc','printer'];numericIds.forEach(id=>{const el=pdt$(`pdt_${id}_${n}`);if(!el)return;el.addEventListener('input',e=>{let val=parseInt(e.target.value);if(isNaN(val)||val<0)val=0;pdtData.phases[i][id]=val;pdt_flagChange();pdt_updateSummary();});});if(pdt$('pdt_pm_'+n))pdt$('pdt_pm_'+n).addEventListener('change',e=>{pdtData.phases[i].pm=e.target.value;pdt_flagChange();});}}
+  function pdt_resetPhase(index){if(index<0||index>1)return;pdtData.phases[index]={company:'',start:'',end:'',pc:0,printer:0,pm:''};pdt_applyFields();pdt_flagChange();}
+  function pdt_resetAll(){pdtData={phases:[{company:'',start:'',end:'',pc:0,printer:0,pm:''},{company:'',start:'',end:'',pc:0,printer:0,pm:''}],notes:''};pdt_applyFields();pdt_flagChange();}
+  document.addEventListener('DOMContentLoaded',()=>{bindAllInputs();pdt_applyFields();showStatus("Sedia untuk mengisi","bg-slate-600");});
+  Object.defineProperty(window,'pdt_resetPhase',{value:pdt_resetPhase,writable:false});Object.defineProperty(window,'pdt_resetAll',{value:pdt_resetAll,writable:false});
+})();
+
+/* PERANTI CERDIK */
+(function(){
+  const PC_KEY='pc_data_full_v1',DEBOUNCE_DELAY=1500,SERVER_URL='https://yourdomain.com/api/save_pc';
+  let fadeTimer=null;
+  function pc_load(key){const raw=localStorage.getItem(key);return raw?JSON.parse(raw):null;}
+  function pc_saveToStorage(key,data){localStorage.setItem(key,JSON.stringify(data));markSaved();}
+  let pcData=pc_load(PC_KEY)||{brand:'',model:'',total:0,ok:0,broken:0,lost:0,missing:0,pm:'',supervise:''};
+  const statusBox=document.getElementById("pc_status");
+  function showStatus(text,color="bg-slate-700",withSpinner=false){if(!statusBox)return;clearTimeout(fadeTimer);const spinner=withSpinner?'<span class="animate-spin mr-2 inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>':"";statusBox.innerHTML=spinner+text;statusBox.className=`pc-badge ${color}`;statusBox.classList.remove("pc-hidden");if(!withSpinner){fadeTimer=setTimeout(()=>statusBox.classList.add("pc-hidden"),3000);}}
+  function markUnsaved(){showStatus("✖ Tidak Disimpan","bg-red-600");}
+  function markSaved(){showStatus("✔ Disimpan (Local + Server)","bg-emerald-700");}
+  function pc$(id){return document.getElementById(id);}
+  function pc_debounce(fn,delay){let t;return(...args)=>{clearTimeout(t);t=setTimeout(()=>fn(...args),delay);};}
+  function pc_uploadToServer(data){showStatus("Menyimpan ke server...","bg-blue-600",true);fetch(SERVER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>{if(!r.ok)throw new Error("Server error "+r.status);return r.json().catch(()=>({ok:true}));}).then(()=>{markSaved();}).catch(err=>{showStatus("⚠ Gagal simpan ke server","bg-red-700");console.error("Upload PC ERROR:",err);});}
+  const pc_autoSave=pc_debounce(()=>{pc_saveToStorage(PC_KEY,pcData);pc_uploadToServer(pcData);},DEBOUNCE_DELAY);
+  function pc_flagChange(){markUnsaved();pc_autoSave();}
+  function pc_applyFields(){pc$('pc_brand').value=pcData.brand||'';pc$('pc_model').value=pcData.model||'';pc$('pc_total_input').value=pcData.total||0;pc$('pc_ok_input').value=pcData.ok||0;pc$('pc_broken_input').value=pcData.broken||0;pc$('pc_lost_input').value=pcData.lost||0;pc$('pc_missing_input').value=pcData.missing||0;pc$('pc_pm').value=pcData.pm||'';pc$('pc_supervise').value=pcData.supervise||'';}
+  function bindInputs(){pc$('pc_brand').addEventListener('input',e=>{pcData.brand=e.target.value;pc_flagChange();});pc$('pc_model').addEventListener('input',e=>{pcData.model=e.target.value;pc_flagChange();});const numeric=[['pc_total_input','total'],['pc_ok_input','ok'],['pc_broken_input','broken'],['pc_lost_input','lost'],['pc_missing_input','missing']];numeric.forEach(([id,key])=>{pc$(id).addEventListener('input',e=>{let v=parseInt(e.target.value);pcData[key]=isNaN(v)||v<0?0:v;pc_flagChange();});});pc$('pc_pm').addEventListener('change',e=>{pcData.pm=e.target.value;pc_flagChange();});pc$('pc_supervise').addEventListener('change',e=>{pcData.supervise=e.target.value;pc_flagChange();});}
+  document.addEventListener('DOMContentLoaded',()=>{bindInputs();pc_applyFields();showStatus("Sedia untuk mengisi","bg-slate-600");});
+})();
+
+/* PERANTI GURU */
+(function(){
+  const PG_KEY='pg_data_full_v1',DEBOUNCE_DELAY=1500,SERVER_URL='https://yourdomain.com/api/save_pg';
+  let fadeTimer=null;
+  function pg_load(key){const raw=localStorage.getItem(key);return raw?JSON.parse(raw):null;}
+  function pg_saveToStorage(key,data){localStorage.setItem(key,JSON.stringify(data));markSaved();}
+  let pgData=pg_load(PG_KEY)||{company:'',start:'',end:'',brand:'',model:'',total:0};
+  const statusBox=document.getElementById("pg_status");
+  function showStatus(text,color="bg-slate-700",withSpinner=false){if(!statusBox)return;clearTimeout(fadeTimer);const spinner=withSpinner?'<span class="animate-spin mr-2 inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>':"";statusBox.innerHTML=spinner+text;statusBox.className=`pg-badge ${color}`;statusBox.classList.remove("pg-hidden");if(!withSpinner){fadeTimer=setTimeout(()=>statusBox.classList.add("pg-hidden"),3000);}}
+  function markUnsaved(){showStatus("✖ Tidak Disimpan","bg-red-600");}
+  function markSaved(){showStatus("✔ Disimpan (Local + Server)","bg-emerald-700");}
+  function pg$(id){return document.getElementById(id);}
+  function pg_debounce(fn,delay){let t;return(...args)=>{clearTimeout(t);t=setTimeout(()=>fn(...args),delay);};}
+  function pg_uploadToServer(data){showStatus("Menyimpan ke server...","bg-blue-600",true);fetch(SERVER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>{if(!r.ok)throw new Error("Server error "+r.status);return r.json().catch(()=>({ok:true}));}).then(()=>{markSaved();}).catch(err=>{showStatus("⚠ Gagal simpan ke server","bg-red-700");console.error("Upload PG ERROR:",err);});}
+  const pg_autoSave=pg_debounce(()=>{pg_saveToStorage(PG_KEY,pgData);pg_uploadToServer(pgData);},DEBOUNCE_DELAY);
+  function pg_flagChange(){markUnsaved();pg_autoSave();}
+  function pg_applyFields(){pg$('pg_company').value=pgData.company||'';pg$('pg_start').value=pgData.start||'';pg$('pg_end').value=pgData.end||'';pg$('pg_brand').value=pgData.brand||'';pg$('pg_model').value=pgData.model||'';pg$('pg_total').value=pgData.total||0;}
+  function bindInputs(){pg$('pg_company').addEventListener('input',e=>{pgData.company=e.target.value;pg_flagChange();});pg$('pg_start').addEventListener('change',e=>{pgData.start=e.target.value;pg_flagChange();});pg$('pg_end').addEventListener('change',e=>{pgData.end=e.target.value;pg_flagChange();});pg$('pg_brand').addEventListener('input',e=>{pgData.brand=e.target.value;pg_flagChange();});pg$('pg_model').addEventListener('input',e=>{pgData.model=e.target.value;pg_flagChange();});pg$('pg_total').addEventListener('input',e=>{let v=parseInt(e.target.value);pgData.total=isNaN(v)||v<0?0:v;pg_flagChange();});}
+  document.addEventListener('DOMContentLoaded',()=>{bindInputs();pg_applyFields();showStatus("Sedia untuk mengisi","bg-slate-600");});
+})();
+
+/* INTERNET */
+(function(){
+  const NET_KEY='net_data_full_v1',DEBOUNCE_DELAY=1500,SERVER_URL='https://yourdomain.com/api/save_net';
+  let fadeTimer=null;
+  function net_load(key){const raw=localStorage.getItem(key);return raw?JSON.parse(raw):null;}
+  function net_saveToStorage(key,data){localStorage.setItem(key,JSON.stringify(data));markSaved();}
+  let netData=net_load(NET_KEY)||{isp:'TM Unifi',tech:'Broadband',speed:'300 Mbps',count:0,start:'',end:''};
+  const statusBox=document.getElementById("net_status");
+  function showStatus(text,color="bg-slate-700",withSpinner=false){if(!statusBox)return;clearTimeout(fadeTimer);const spinner=withSpinner?'<span class="animate-spin mr-2 inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>':"";statusBox.innerHTML=spinner+text;statusBox.className=`net-badge ${color}`;statusBox.classList.remove("net-hidden");if(!withSpinner){fadeTimer=setTimeout(()=>statusBox.classList.add("net-hidden"),3000);}}
+  function markUnsaved(){showStatus("✖ Tidak Disimpan","bg-red-600");}
+  function markSaved(){showStatus("✔ Disimpan (Local + Server)","bg-emerald-700");}
+  function net$(id){return document.getElementById(id);}
+  function net_debounce(fn,delay){let t;return(...args)=>{clearTimeout(t);t=setTimeout(()=>fn(...args),delay);};}
+  function net_uploadToServer(data){showStatus("Menyimpan ke server...","bg-blue-600",true);fetch(SERVER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>{if(!r.ok)throw new Error("Server error "+r.status);return r.json().catch(()=>({ok:true}));}).then(()=>{markSaved();}).catch(err=>{showStatus("⚠ Gagal simpan ke server","bg-red-700");console.error("Upload NET ERROR:",err);});}
+  const net_autoSave=net_debounce(()=>{net_saveToStorage(NET_KEY,netData);net_uploadToServer(netData);},DEBOUNCE_DELAY);
+  function net_flagChange(){markUnsaved();net_autoSave();}
+  function net_applyFields(){net$('net_isp').value=netData.isp;net$('net_tech').value=netData.tech;net$('net_speed').value=netData.speed;net$('net_count').value=netData.count;net$('net_start').value=netData.start||'';net$('net_end').value=netData.end||'';}
+  function bindInputs(){net$('net_isp').addEventListener('change',e=>{netData.isp=e.target.value;net_flagChange();});net$('net_tech').addEventListener('change',e=>{netData.tech=e.target.value;net_flagChange();});net$('net_speed').addEventListener('change',e=>{netData.speed=e.target.value;net_flagChange();});net$('net_count').addEventListener('input',e=>{let v=parseInt(e.target.value);netData.count=isNaN(v)||v<0?0:v;net_flagChange();});net$('net_start').addEventListener('change',e=>{netData.start=e.target.value;net_flagChange();});net$('net_end').addEventListener('change',e=>{netData.end=e.target.value;net_flagChange();});}
+  document.addEventListener('DOMContentLoaded',()=>{bindInputs();net_applyFields();showStatus("Sedia untuk mengisi","bg-slate-600");});
+})();
+
+/* Logout modal handlers */
+const logoutBtn=document.getElementById('logoutBtn');
+const modal=document.getElementById('logoutModal');
+const cancelBtn=document.getElementById('cancelLogout');
+const confirmBtn=document.getElementById('confirmLogout');
+logoutBtn&&logoutBtn.addEventListener('click',()=>{modal.classList.remove('hidden');});
+cancelBtn&&cancelBtn.addEventListener('click',()=>{modal.classList.add('hidden');});
+modal&&modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.add('hidden');}});
+confirmBtn&&confirmBtn.addEventListener('click',()=>{localStorage.removeItem('current_user');if(typeof toast==='function'){toast('Anda telah log keluar.');}modal.classList.add('hidden');});
+
+</script>
+</body>
+</html>

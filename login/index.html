@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Log Masuk — Sistem Pengurusan Data ICT Sekolah</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================== RESET & BODY ================== */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: url('https://lh3.googleusercontent.com/d/1AS3tZyizHN4D58G6Vy2UkgWD18MGPhCu=w2000') 
+    no-repeat center center/cover;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+}
+
+/* ================== SIDEBAR ================== */
+.sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(5px);
+    padding: 20px 10px;
+    flex-shrink: 0;
+    min-height: 100vh;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.sidebar .logo {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.sidebar h2 {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar p {
+    color: #e5e7eb;
+    font-size: 13px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 1024px) {
+    .right-panel {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+    .sidebar {
+        width: 220px;
+        min-height: 90vh;
+        padding: 15px 8px;
+    }
+    .sidebar .logo {
+        width: 150px;
+        height: 150px;
+        margin-top: 40px;
+    }
+    .sidebar h2 {
+        font-size: 12px;
+    }
+    .sidebar p {
+        font-size: 10px;
+    }
+}
+
+/* ================== LOGIN FORM ================== */
+.form-container {
+    flex:1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-box {
+    width: 360px;
+    padding: 25px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(8px);
+    color: white;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+h3 {
+    font-size:24px; text-align:center; color:#fff;
+    position:relative; z-index:1;
+}
+h3::before {
+    content:""; position:absolute; left:0; top:0; width:100%; height:100%;
+    z-index:-1;
+    background: linear-gradient(270deg, #4c00ff, #8a00ff, #00eaff);
+    background-size:300%;
+    animation:aurora 10s infinite linear;
+    filter:blur(15px);
+}
+@keyframes aurora { 0%{background-position:0%;} 100%{background-position:300%;} }
+
+label { font-size: 13px; font-weight: 500; }
+
+.input-wrapper {
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  box-sizing: border-box;
+}
+
+input::placeholder { color:#dddddd30; }
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ffffff65;
+  font-size: 14px;
+  user-select: none;
+}
+
+button {
+  width:100%;
+  padding:10px;
+  border:none;
+  background: linear-gradient(135deg, #3b82f6, #9333ea);
+  color:white;
+  font-size:14px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:8px;
+}
+button:hover { opacity: 0.9; }
+
+.switch-link { text-align:center; margin-top:10px; font-size:13px; }
+.switch-link a { color:#3b82f6; text-decoration:none; }
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar { width:100%; min-height:auto; padding:15px 10px; }
+    .form-container { padding:20px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <img src="https://drive.google.com/thumbnail?id=1chJPMOCORig5DYGs5JAVIaN8hB8PAreA&sz=w2000" alt="Logo PTIS" class="logo">
+    <h2>Sistem Pengurusan Data ICT Sekolah</h2>
+    <p>Mudah, pantas, mesra pengguna</p>
+</div>
+
+<!-- LOGIN FORM -->
+<div class="form-container">
+  <div class="form-box">
+    <h3>Log Masuk</h3>
+
+    <form id="loginForm">
+      <label>Emel</label>
+      <input type="email" id="loginEmail" placeholder="@moe.gov.my / @moe.edu.my" required />
+
+      <label>Kata Laluan</label>
+      <div class="input-wrapper">
+        <input type="password" id="loginPassword" placeholder="Masukkan kata laluan" required />
+        <span class="toggle-password" data-target="loginPassword">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" fill="none" 
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
+          </svg>
+        </span>
+      </div>
+
+      <button type="submit">Log Masuk</button>
+    </form>
+
+    <div class="switch-link">
+      Tiada akaun? <a href="register.html">Daftar Pengguna Baharu</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// TOGGLE PASSWORD
+document.querySelectorAll(".toggle-password").forEach(icon => {
+  icon.addEventListener("click", () => {
+    const targetId = icon.getAttribute("data-target");
+    const input = document.getElementById(targetId);
+    const svg = icon.querySelector("svg");
+
+    if (input.type === "password") {
+      input.type = "text";
+      svg.innerHTML = `<path d="M17.94 17.94L6.06 6.06M1 1l22 22"></path><circle cx="12" cy="12" r="3"></circle>`;
+    } else {
+      input.type = "password";
+      svg.innerHTML = `<circle cx="12" cy="12" r="3"></circle>
+                       <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>`;
+    }
+  });
+});
+
+// Login handler
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+
+  try {
+    const res = await fetch("https://YOUR_WORKER_URL", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Log masuk berjaya!");
+      // window.location.href = "dashboard.html";
+    } else {
+      alert(data.error);
+    }
+  } catch(err) {
+    alert("Ralat sambungan, cuba lagi.");
+  }
+});
+
+</script>
+
+</body>
+</html>
